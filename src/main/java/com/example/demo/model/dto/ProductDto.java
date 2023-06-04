@@ -1,6 +1,5 @@
 package com.example.demo.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -9,19 +8,15 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-
 @ApiModel(description = "Товар")
 @Data
 public class ProductDto {
-
-    @JsonIgnore
-    private Long id;
-
     @ApiModelProperty(
-            notes = "Тип товара",
-            name = "productType"
+            notes = "Идентификатор",
+            name = "id",
+            example = "1"
     )
-    private ProductTypeDto productType;
+    private Long id;
 
     @ApiModelProperty(
             notes = "Серийный номер",
@@ -54,5 +49,15 @@ public class ProductDto {
     )
     private Integer count;
 
-    private List<AdditionalPropertyValueDto> additionalPropertyValues;
+    @ApiModelProperty(
+            notes = "Дополнительные свойства",
+            name = "additionalProperties"
+    )
+    private List<AdditionalPropertyDto> additionalProperties;
+
+    @ApiModelProperty(
+            notes = "Тип товара",
+            name = "productType"
+    )
+    private ProductTypeDto productType;
 }

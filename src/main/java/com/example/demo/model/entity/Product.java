@@ -2,10 +2,15 @@ package com.example.demo.model.entity;
 
 import lombok.Data;
 import lombok.ToString;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Data
@@ -24,16 +29,9 @@ public class Product {
 
     private Integer count;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @Fetch(FetchMode.JOIN)
-    private ProductType productType;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<AdditionalProperty> additionalProperties;
 
-    @ManyToMany(
-            mappedBy = "products",
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            }
-    )
-    private List<AdditionalPropertyValue> additionalPropertyValues;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private ProductType productType;
 }

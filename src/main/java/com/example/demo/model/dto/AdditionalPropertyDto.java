@@ -6,10 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 
-
-@ApiModel(description = "Товар")
+@ApiModel(description = "Дополнительное свойство")
 @Data
 public class AdditionalPropertyDto {
 
@@ -24,6 +22,14 @@ public class AdditionalPropertyDto {
     @NotBlank
     private String name;
 
+    @ApiModelProperty(
+            notes = "Значение",
+            name = "value",
+            example = "17"
+    )
+    @NotBlank
+    private String value;
+
     @JsonIgnore
-    private List<AdditionalPropertyValueDto> additionalPropertyValues;
+    private ProductDto product;
 }
